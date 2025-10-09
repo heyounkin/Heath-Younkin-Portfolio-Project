@@ -8,6 +8,20 @@ the following form: YYYY.0M.0D.
 
 ## [Unreleased]
 
+## [2025.10.09]
+
+### Added
+
+- Designed a proof of concept for LogicGate component
+
+## [2025.9.26]
+
+### Added
+
+- Designed a SongSort component
+- Designed a LogicGate component
+- Designed a Sprite component
+
 ## [2024.12.30]
 
 - Added table-based rubrics to all 6 parts of the project
