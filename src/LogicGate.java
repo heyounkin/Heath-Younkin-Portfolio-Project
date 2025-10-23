@@ -22,8 +22,8 @@ public interface LogicGate extends LogicGateKernel {
      * Returns a string representation of this gate and its current output.
      *
      * @return a readable string e.g. "AND(1,1) = 1"
-     * @ensures toString = (this.type) ++ "(" ++ entries(this.inputs) ++ ") = "
-     *          ++ this.getOutput()
+     * @ensures toString = (this.type) + "(" + entries(this.inputs) + ") = " +
+     *          this.getOutput()
      */
     @Override
     String toString();
@@ -32,7 +32,7 @@ public interface LogicGate extends LogicGateKernel {
      * Creates a duplicate LogicGate with the same type and inputs.
      *
      * @return new LogicGate identical to this one
-     * @ensures clone ≠ this AND clone.getType() = this.type AND
+     * @ensures clone != this AND clone.getType() = this.type AND
      *          entries(clone.getInputs()) = this.inputs
      */
     LogicGate clone();
