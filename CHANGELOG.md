@@ -6,7 +6,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
-## [Unreleased]
+## [2025.22.19]
+
+### Added
+
+- Designed `LogicGateKernel` interface
+- Designed `LogicGate` interface
+- Renamed original class to `LogicGate1`
+- Moved enumerator `GateType` to its own java file
+- Created a diagram for the component hierarchy
+
+### To Do
+
+- Need to create a `connectTo` method that allows for users creation of their own logic gates
+
+## [2025.10.09]
+
+### Added
+
+- Designed a proof of concept for LogicGate component
+
+## [2025.9.19]
+
+### Added
+
+- Designed a SongSort component
+- Designed a LogicGate component
+- Designed a Sprite component
 
 ## [2024.12.30]
 
@@ -73,6 +99,5 @@ the following form: YYYY.0M.0D.
 - Created initial drafts of the six portfolio assessments
 - Added READMEs to key folders like `test` and `lib` to explain their purpose
 
-[unreleased]: https://github.com/jrg94/portfolio-project/compare/v2024.08.07...HEAD
 [2024.08.07]: https://github.com/jrg94/portfolio-project/compare/v2024.01.07...v2024.08.07
 [2024.01.07]: https://github.com/jrg94/portfolio-project/releases/tag/v2024.01.07
