@@ -1,12 +1,10 @@
 # Portfolio Part 1: Component Brainstorming
 
-- **Name**: <!-- TODO: fill with first and last name (e.g., Brutus Buckeye) then delete this comment -->
-- **Dot Number**: <!-- TODO: fill with OSU dot number (e.g., buckeye.17) then delete this comment -->
-- **Due Date**: <!-- TODO: fill with due date and time (e.g., 10/17 @ 3:10 PM EST) then delete this comment -->
+- **Name**: Heath Younkin
+- **Dot Number**: younkin.35
+- **Due Date**: 9/19
 
 ## Assignment Overview
-
-<!-- TODO: read the assignment overview then delete this comment -->
 
 The overall goal of the portfolio project is to have you design and implement
 your own OSU component. There are no limits to what you choose to design and
@@ -29,8 +27,6 @@ implement.
 
 ## Assignment Checklist
 
-<!-- TODO: browse the checklist then delete this comment -->
-
 To be sure you have completed everything on this assignment, we have littered
 this document with TODO comments. You can browse all of them in VSCode by
 opening the TODOs window from the sidebar. The icon looks like a tree and will
@@ -52,8 +48,6 @@ to the tree diagram (you may remove this one as well):
 
 ## Assignment Learning Objectives
 
-<!-- TODO: read the assignment learning objectives then delete this comment -->
-
 Without learning objectives, there really is no clear reason why a particular
 assessment or activity exists. Therefore, to be completely transparent, here is
 what we're hoping you will learn through this particular aspect of the portfolio
@@ -66,8 +60,6 @@ project. Specifically, students should be able to:
    discipline
 
 ## Assignment Rubric: 10 Points
-
-<!-- TODO: read the assignment rubric then delete this comment -->
 
 Again, to be completely transparent, most of the portfolio project, except the
 final submission, is designed as a formative assessment. Formative assessments
@@ -106,23 +98,15 @@ Below is further rationale/explanation for the rubric items above:
 > brainstorming. Plus it helps us get to know you better! Feel free to share
 > images in this section.
 
-<!-- TODO: briefly talk about your interests then delete this comment.
-Also, protip: you can preview what your response looks like by hitting
-the magnifying glass icon in the upper-right corner or pressing CTRL+K and
-then V. This kind of button combination is called a chord, for whatever
-reason -->
+Career goals are still something I am working on. I know that I want to work in a field that does something related to technology and electronics. Whether that be hardware, software, etc. I do not know. In terms of interests I am interested in many different things. Movies, music and djing, art (ceramics), skiing, enjoying the outdoors and more.
 
 ## Assignment
-
-<!-- TODO: read the assignment section then delete this comment -->
 
 As previously stated, you are tasked with brainstorming 3 possible components.
 To aid you in this process, we have provided [some example components][example-components]
 that may help you in your brainstorming. All of these components were made at
 some point by one of your peers, so you should feel confident that you can
 accomplish any of them.
-
-<!-- TODO: browse the list of possible projects then delete this comment -->
 
 There is no requirement that you use any of the components listed above.
 If you want to model something else, go for it! Very common early object
@@ -200,68 +184,90 @@ will likely refine your design to make your implementation easier to use.
 
 > Please use this section to share your designs.
 
-- Component Design #1: <!-- TODO: give component a name then delete this comment -->
+- Component Design #1: SongSort
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - A component that functions in tandem with a typical djing software but allows for more customization in terms of how you can sort your music and analyze it. This software could provide a better calculation of the time/measurement (bars) in between parts of songs (phrases).
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - `void song()` - classify a song from which one could pull info or add song to groups
+    - `string title()` - store a songs title, return string
+    - `string artist()` - store a songs artist, return string
+    - `string genre()` - store a songs genre, return string
+    - `string key()` - store a songs key, return string
+    - `double bpm()` - store a songs bpm, return double
+    - `double length()` - store a songs length, return double
+    - `void group(String str)` - store the songs in a created group
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
+    - `void songInfo()` - would store songs info: title, artist, key, bpm, genre, etc.
+    - `string getGroup()` - would return a songs group
+    - `double getBar(double d)` - get what bar a song is at at a given time
+    - `string phrase()` - provide what kind of phrase a song is at at a given bar
+    - `void setPhrase(String str)` - set a name for a phrase
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, one would want to be able to change the groups a song is in, its phrases, and possibly other info.
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Likely not, everything will be based off of 'song' objects
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Possibly for keys: '12A, 1B, etc.' and the beginning of the song ex: "0.00"
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, `songInfo()` for example would call the info kernel methods that hold the songs title, bpm, etc.
 
-- Component Design #2: <!-- TODO: give component a name then delete this comment -->
+- Component Design #2: LogicGate
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - A component that models digital logic. It would take multiple boolean inputs and produce a boolean output based on the type of gate. This could be used to build more complex gates and circuits.
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - `void setInputs(boolean arr[])` - sets inputs for the gate
+    - `void getInput()` - outputs inputs
+    - `boolean getOutput()` - returns boolean output given the gates current input
+    - `void setType(GateType g)` - sets the gates type AND, OR, NOT
+    - `GateType getType()` - returns the gates type AND, OR, NOT
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
+    - `toggleInput(int inputIndex)` - toggle the value of a certain gates indexed input
+    - `string toString()` - returns a string representation of the inputs and outputs: `"AND(1,1) = 1"`
+    - `LogicGate clone()` - create a dupicate gate with the same inputs
+    - `connectTo(LogicGate L, int inputIndex)` - link different gates together
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes inputs and gatetypes can change.
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes possibly a `Connection` class for making circuits and more complex gates. It may also need a `GateType` class that defines the kind of gates that can be made, allowing the user to make new ones.
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes the basic gate types: AND, OR, NOT. Possibly even others like: NAND, NOR, XOR, XNOR, etc.
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - `toggleInput()` would require the use of `setInputs()` as it would have to flip an input value. `toString()` would call `getInput()`, `getOutput()`, and `getType()`.
 
-- Component Design #3: <!-- TODO: give component a name then delete this comment -->
+- Component Design #3: Sprite
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - A component that represents a 2D object in a game. It has a position, size, image, and can be moved up or down on a screen.
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - `void setPosition(double x, double y)` - set sprites position
+    - `double getPosition()` - returns current coordinates
+    - `void setImage(Image i)` - sets the sprites look
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
+    - `void move(double x, double y)` - shifts the sprite relative to its current position
+    - `boolean collides(Sprite s)` - checks if sprite collides with another sprite
+    - `boolean isVisible()` - checks if sprite should be rendered
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes multiple attributes about a sprite change, specifically location.
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Possibly an `image` class or a `bounds` class to check for collisions.
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Possibly starting positions, direction and state.
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, `move()` requires the current location using `getPosition()` and the future location with `setPosition()`
 
 ## Post-Assignment
 
@@ -269,8 +275,6 @@ The following sections detail everything that you should do once you've
 completed the assignment.
 
 ### Changelog
-
-<!-- TODO: create CHANGELOG then delete this comment -->
 
 At the end of every assignment, you should update the
 [CHANGELOG.md](../../CHANGELOG.md) file found in the root of the project folder.
@@ -309,8 +313,6 @@ of development.
 
 ### Submission
 
-<!-- TODO: read the submission instructions then delete this comment -->
-
 If you have completed the assignment using this template, we recommend that
 you convert it to a PDF before submission. If you're not sure how, check out
 this [Markdown to PDF guide][markdown-to-pdf-guide]. However, PDFs should be
@@ -319,11 +321,7 @@ all your work is there before submitting. For future assignments, you will
 just be submitting a link to a pull request. This will be the only time
 you have to submit any PDFs.
 
-<!-- TODO: upload a PDF of this document and the CHANGELOG to Carmen then delete this comment -->
-
 ### Peer Review
-
-<!-- TODO: review the peer review guidelines then delete this comment -->
 
 Following the completion of this assignment, you will be assigned three
 students' component brainstorming assignments for review. Your job during the
@@ -349,8 +347,6 @@ PDF to read this rubric as a table).
 If you'd like to give feedback for this assignment (or any assignment, really),
 make use of [this survey][survey]. Your feedback helps make assignments
 better for future students.
-
-<!-- TODO: follow the link to share your feedback then delete this comment -->
 
 [example-components]: https://therenegadecoder.com/code/the-never-ending-list-of-small-programming-project-ideas/
 [markdown-to-pdf-guide]: https://therenegadecoder.com/blog/how-to-convert-markdown-to-a-pdf-3-quick-solutions/
