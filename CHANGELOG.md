@@ -6,13 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
-## [2025.9.19]
+## [2025.22.19]
 
 ### Added
 
-- Designed a `SortSong` component
-- Designed a `LogicGate` component
-- Designed a `Sprite` component
+- Designed `LogicGateKernel` interface
+- Designed `LogicGate` interface
+- Renamed original class to `LogicGate1`
+- Moved enumerator `GateType` to its own java file
+- Created a diagram for the component hierarchy
+
+### To Do
+
+- Need to create a `connectTo` method that allows for users creation of their own logic gates
 
 ## [2025.10.09]
 
@@ -20,7 +26,7 @@ the following form: YYYY.0M.0D.
 
 - Designed a proof of concept for LogicGate component
 
-## [2025.9.26]
+## [2025.9.19]
 
 ### Added
 
