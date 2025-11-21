@@ -6,7 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
-## [2025.22.19]
+## [2025.11.21]
+
+### Added
+
+- Completed kernel implementation for `LogicGate1`
+- Added representation, convention, and correspondence to `LogicGate1`
+- Completed constructors for `LogicGate1`
+- Implemented all `Standard<LogicGate1>` methods: newInstance, clear, transferFrom
+
+## [2025.11.12]
+
+### Added
+
+- Designed abstract class for `LogicGate` component
+- Created implementations in `LogicGateSecondary` of the methods declared in `LogicGate`
+
+## [2025.10.19]
 
 ### Added
 

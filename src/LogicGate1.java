@@ -1,7 +1,31 @@
 /**
  * Class LogicGate.
+ *
+ * Representation:
+ * <pre>
+ * private boolean[] inputs;
+ * private GateType type;
+ * </pre>
+ *
+ * Convention:
+ * <pre>
+ * - {@code inputs} may be {@code null}, meaning "no inputs set" yet.
+ * - {@code type} may be {@code null}, meaning "no type set" yet.
+ * - If {@code type == GateType.NOT} and {@code inputs != null}, then
+ *       {@code inputs.length == 1}.
+ * </pre>
+ *
+ * Correspondence:
+ * <pre>
+ * - {@code this.inputs} corresponds to the abstract input string
+ *   {@code this.inputs} in the model, in left-to-right index order.
+ * - If {@code inputs == null}, then the abstract input string is empty
+ *       (no inputs set).
+ * - {@code this.type} corresponds exactly to the abstract {@code this.type}
+ *       in the model.
+ * </pre>
  */
-public class LogicGate1 {
+public class LogicGate1 extends LogicGateSecondary implements LogicGateKernel {
 
     /**
      * boolean array for inputs.
@@ -15,13 +39,21 @@ public class LogicGate1 {
 
     // ---Constructors---
 
+
+    /**
+     * Initializes a new, empty representation.
+     */
+    private void createNewRep() {
+        this.inputs = null;
+        this.type = null;
+    }
+
     /**
      * Default constructor. Creates an empty gate. Type and inputs can be set
      * later.
      */
     public LogicGate1() {
-        this.inputs = null;
-        this.type = null;
+        this.createNewRep();
     }
 
     /**
@@ -48,6 +80,30 @@ public class LogicGate1 {
         this.inputs = inputs.clone();
     }
 
+    // -- Standard<LogicGate1> methods --
+    @Override
+    public LogicGate1 newInstance() {
+        return new LogicGate1();
+    }
+
+    @Override
+    public void clear() {
+        this.createNewRep();
+    }
+
+    @Override
+    public void transferFrom(LogicGate1 source) {
+        if (source == this) {
+            return;
+        }
+        assert source != null : "source must not be null";
+
+        this.inputs = source.inputs;
+        this.type = source.type;
+
+        source.createNewRep();
+    }
+
     // ---Kernel Methods---
 
     /**
@@ -56,6 +112,7 @@ public class LogicGate1 {
      * @param gate
      *            GateType (AND, OR, NOT)
      */
+    @Override
     public void setType(GateType gate) {
         this.type = gate;
     }
@@ -65,6 +122,7 @@ public class LogicGate1 {
      *
      * @return GateType (AND, OR, NOT)
      */
+    @Override
     public GateType getType() {
         return this.type;
     }
@@ -75,23 +133,20 @@ public class LogicGate1 {
      * @param arr
      *            boolean array of input values
      */
+    @Override
     public void setInputs(boolean[] arr) {
         this.inputs = arr.clone();
     }
 
     /**
-     * Prints the current input values.
+     * Returns the current input values.
      */
-    public void getInput() {
-        System.out.print("Inputs: ");
+    @Override
+    public boolean[] getInputs() {
         if (this.inputs == null) {
-            System.out.println("No inputs set.");
-        } else {
-            for (boolean input : this.inputs) {
-                System.out.print(input + " ");
-            }
-            System.out.println();
+            return null;
         }
+        return this.inputs.clone(); // defensive copy
     }
 
     /**
@@ -99,6 +154,7 @@ public class LogicGate1 {
      *
      * @return boolean output
      */
+    @Override
     public boolean getOutput() {
         if (this.type == null || this.inputs == null) {
             throw new IllegalStateException("Gate type or inputs not set.");
