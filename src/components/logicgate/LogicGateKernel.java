@@ -1,3 +1,4 @@
+package components.logicgate;
 import components.standard.Standard;
 
 /**

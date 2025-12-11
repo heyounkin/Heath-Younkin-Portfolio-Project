@@ -1,3 +1,5 @@
+package components.logicgate;
+
 /**
  * Class LogicGate.
  *
@@ -25,7 +27,7 @@
  *       in the model.
  * </pre>
  */
-public class LogicGate1 extends LogicGateSecondary implements LogicGateKernel {
+public class LogicGate1 extends LogicGateSecondary {
 
     /**
      * boolean array for inputs.
@@ -38,7 +40,6 @@ public class LogicGate1 extends LogicGateSecondary implements LogicGateKernel {
     private GateType type;
 
     // ---Constructors---
-
 
     /**
      * Initializes a new, empty representation.
@@ -81,21 +82,28 @@ public class LogicGate1 extends LogicGateSecondary implements LogicGateKernel {
     }
 
     // -- Standard<LogicGate1> methods --
+
+    /**
+     * No additional representation needed.
+     */
     @Override
     public LogicGate1 newInstance() {
         return new LogicGate1();
     }
 
+    /**
+     * No additional representation needed.
+     */
     @Override
     public void clear() {
         this.createNewRep();
     }
 
+    /**
+     * No additional representation needed.
+     */
     @Override
     public void transferFrom(LogicGate1 source) {
-        if (source == this) {
-            return;
-        }
         assert source != null : "source must not be null";
 
         this.inputs = source.inputs;
@@ -107,10 +115,7 @@ public class LogicGate1 extends LogicGateSecondary implements LogicGateKernel {
     // ---Kernel Methods---
 
     /**
-     * Sets the type of the logic gate.
-     *
-     * @param gate
-     *            GateType (AND, OR, NOT)
+     * No additional representation needed.
      */
     @Override
     public void setType(GateType gate) {
@@ -118,9 +123,7 @@ public class LogicGate1 extends LogicGateSecondary implements LogicGateKernel {
     }
 
     /**
-     * Returns the current type of the gate.
-     *
-     * @return GateType (AND, OR, NOT)
+     * No additional representation needed.
      */
     @Override
     public GateType getType() {
@@ -128,10 +131,7 @@ public class LogicGate1 extends LogicGateSecondary implements LogicGateKernel {
     }
 
     /**
-     * Sets the inputs for the gate.
-     *
-     * @param arr
-     *            boolean array of input values
+     * No additional representation needed.
      */
     @Override
     public void setInputs(boolean[] arr) {
@@ -139,20 +139,19 @@ public class LogicGate1 extends LogicGateSecondary implements LogicGateKernel {
     }
 
     /**
-     * Returns the current input values.
+     * No additional representation needed.
      */
     @Override
     public boolean[] getInputs() {
         if (this.inputs == null) {
             return null;
         }
+
         return this.inputs.clone(); // defensive copy
     }
 
     /**
-     * Returns the output given the current inputs and type.
-     *
-     * @return boolean output
+     * No additional representation needed.
      */
     @Override
     public boolean getOutput() {

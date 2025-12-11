@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>06-component-finishing-touches.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* a11y-light theme */
+/* Based on the Tomorrow Night Eighties theme: https://github.com/isagalaev/highlight.js/blob/master/src/styles/tomorrow-night-eighties.css */
+/* @author: ericwbailey */
+
+/* Comment */
+.hljs-comment,
+.hljs-quote {
+  color: #696969;
+}
+
+/* Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+  color: #d91e18;
+}
+
+/* Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+  color: #aa5d00;
+}
+
+/* Yellow */
+.hljs-attribute {
+  color: #aa5d00;
+}
+
+/* Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+  color: #008000;
+}
+
+/* Blue */
+.hljs-title,
+.hljs-section {
+  color: #007faa;
+}
+
+/* Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+  color: #7928a1;
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  background: #fefefe;
+  color: #545454;
+  padding: 0.5em;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+@media screen and (-ms-high-contrast: active) {
+  .hljs-addition,
+  .hljs-attribute,
+  .hljs-built_in,
+  .hljs-builtin-name,
+  .hljs-bullet,
+  .hljs-comment,
+  .hljs-link,
+  .hljs-literal,
+  .hljs-meta,
+  .hljs-number,
+  .hljs-params,
+  .hljs-string,
+  .hljs-symbol,
+  .hljs-type,
+  .hljs-quote {
+        color: highlight;
+    }
+
+    .hljs-keyword,
+    .hljs-selector-tag {
+        font-weight: bold;
+    }
+}
+
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="portfolio-part-6-finishing-touches">Portfolio Part 6: Finishing Touches</h1>
+<ul>
+<li><strong>Name</strong>: Heath Younkin</li>
+<li><strong>Dot Number</strong>: younkin.35</li>
+<li><strong>Due Date</strong>: 12/10 @ 11:59 PM</li>
+</ul>
+<h2 id="assignment-overview">Assignment Overview</h2>
+<p>By now, you should have an entire component implemented at all levels. For
+example, you should have two interfaces, an abstract class, and a kernel
+implementation.</p>
+<p>Now, we want you to start producing your actual portfolio. To do that, you
+need to do a few things first:</p>
+<ol>
+<li><strong>You need to add testing</strong>: tests can be written basically as soon as you
+have designed your interfaces. Of course, because of how many changes your
+design has probably had up to this point, writing tests that early may lead
+to a lot of rework. Therefore, there is no better time to start testing than
+now that you have something more concrete.</li>
+<li><strong>You need to share some use cases</strong>: while having an API is useful, it's
+not always clear how and why someone would use it. Therefore, you should
+probably replicate some of the proof-of-concept work you did previously
+using your complete component.</li>
+<li><strong>You need to publish your work</strong>: if you haven't yet already, now would
+be a good time to publish your component to a public repo like GitHub.</li>
+</ol>
+<p>These are the three main tasks we want you to complete to round out your
+portfolio project. However, there are tons of ways to take your work to the next
+level, such as:</p>
+<ol>
+<li><strong>Publish your documentation</strong>: one of the perks of using JUnit is that you
+can directly convert all those comments you made in your code to HTML
+files that can be hosted as Java documentation. How do you think the OSU
+API works?</li>
+<li><strong>Start a CI pipeline</strong>: it's very likely that you won't touch your component
+again after this class. That said, maybe you want to actual publish your
+component to a dependency manager like Maven. If so, it's a good idea to
+setup some automated testing and deployment through &quot;Continuous Integration.&quot;
+GitHub Actions is a common tool for this, so why not look into it?</li>
+<li><strong>Track version history</strong>: in the world of software development, it's very
+important that you version your API with a version number. There are many
+different techniques for versioning software, but a date-based system is
+pretty easy. If you release your component on a particular date, use that
+date as the version number. Alternatively, you can make use of other
+techniques like semantic versioning.</li>
+</ol>
+<p>Many of these additional techniques are somewhat out of the scope of this
+course, but just knowing about them could set you up for long term success.</p>
+<h2 id="assignment-checklist">Assignment Checklist</h2>
+<p>To be sure you have completed everything on this assignment, we have littered
+this document with TODO comments. You can browse all of them in VSCode by
+opening the TODOs window from the sidebar. The icon looks like a tree and will
+likely have a large number next to it indicating the number of TODOS. You'll
+chip away at that number over the course of the semester. However, if you'd
+like to remove this number, you can disable it by removing the following
+line from the <code>settings.json</code> file:</p>
+<pre class="hljs"><code><div><span class="hljs-string">"todo-tree.general.showActivityBarBadge"</span>: <span class="hljs-literal">true</span>,
+</div></code></pre>
+<p>Which is not to be confused with the following setting that adds the counts
+to the tree diagram (you may remove this one as well):</p>
+<pre class="hljs"><code><div><span class="hljs-string">"todo-tree.tree.showCountsInTree"</span>: <span class="hljs-literal">true</span>,
+</div></code></pre>
+<h2 id="assignment-learning-objectives">Assignment Learning Objectives</h2>
+<p>Without learning objectives, there really is no clear reason why a particular
+assessment or activity exists. Therefore, to be completely transparent, here is
+what we're hoping you will learn through this particular aspect of the portfolio
+project. Specifically, students should be able to:</p>
+<ol>
+<li>Design a test plan for a software sequence component</li>
+<li>Provide example use cases of a software sequence component</li>
+<li>Use version control software to share a repository of code</li>
+<li>Reflect on the software development process and the individual's own growth</li>
+</ol>
+<h2 id="assignment-rubric">Assignment Rubric</h2>
+<p>Unlike previous parts of the portfolio project, in this part of the project,
+you'll receive a summative assessment, which usually involves a more critical
+lens. In other words, at this stage, we're expecting you to demonstrate some
+mastery of the material. See the rubric items for specifics.</p>
+<table>
+<thead>
+<tr>
+<th>Learning Objective</th>
+<th>Subcategory</th>
+<th>Weight</th>
+<th>Missing</th>
+<th>Beginning</th>
+<th>Developing</th>
+<th>Meeting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Students should be able to design a JUnit test plan that thoroughly tests all component methods</td>
+<td>Procedural Creation</td>
+<td>15</td>
+<td>(0) No attempt is made to test the component</td>
+<td>(5) Minimal testing is provided that only covers a small portion of the codebase</td>
+<td>(10) A test suite is designed but misses some key test cases</td>
+<td>(15) A thorough test plan is designed that covers the entire codebase</td>
+</tr>
+<tr>
+<td>Students should be able to generate two qualitatively different use cases of their component</td>
+<td>Factual Creation</td>
+<td>10</td>
+<td>(0) No attempt is made to generate two use cases of the component</td>
+<td>(3) At least one use case is provided</td>
+<td>(7) Two use cases are provided but are not significantly different from each other</td>
+<td>(10) Two qualitatively different uses cases are provided showcasing the range of possible uses for the component</td>
+</tr>
+<tr>
+<td>Students should be able to reflect on the software development process</td>
+<td>Metacognitive Evaluation</td>
+<td>15</td>
+<td>(0) No attempt is made to reflect on the software development process</td>
+<td>(5) A low effort reflection is made to answer the questions and/or clearly falls from a tool like ChatGPT</td>
+<td>(10) A genuine reflection is made but some answers are thin or missing</td>
+<td>(15) A genuine reflection is provided that shows metacognition (i.e., a deep consideration for how you've changed or developed)</td>
+</tr>
+<tr>
+<td>Students should be able to judge the polish of their component</td>
+<td>Procedural Evaluation</td>
+<td>10</td>
+<td>(0) No attempt is made to polish up the component</td>
+<td>(3) The overall level of polish is consistent with expectations from previous assignments, but no further effort is made to show pride in the work</td>
+<td>(7) Polish is demonstrated through adherence to the OSU discipline only; no personal discipline or style is demonstrated</td>
+<td>(10) Component demonstrates a high level of pride in the work by not only adhering to the OSU discipline but also by adopting a personal style, which can be demonstrated by documenting the use cases and testing, updating the main README, curating the GitHub page layout for readers, etc.</td>
+</tr>
+</tbody>
+</table>
+<p>Below is further rationale/explanation for the rubric items above:</p>
+<ol>
+<li>All component methods must be tested including the Standard,
+kernel, and secondary methods. The format of testing will be different from
+the style used in the course because it is unlikely that you will have an
+existing component to test against (more on this below).</li>
+<li>There must be at least two different sample codes provided that
+show how the component might be used. For example, consider how <code>XMLTree</code>
+was used to create the <code>RSSReader</code> and the <code>RSSAggregator</code>. There is no
+expectation that you provide samples to this much depth, but two files
+with at least a main method would be excellent.</li>
+<li>As you work through these finishing touches, take a moment to
+reflect on the software development process. There are reflection prompts
+below. You should also reflect on your growth as a developer and share
+details about what you've learned.</li>
+<li>The overall component must exhibit a high level of polish.
+Because all previous parts of this assignment are meant to be formative,
+assessments were generally charitable. In this phase, you should submit
+a component as if you were a professional software engineer. Follow good
+practices like using good variable names, documenting your methods, and
+overall adhering to the discipline.</li>
+</ol>
+<h2 id="pre-assignment-tasks">Pre-Assignment Tasks</h2>
+<p>To finish your component, make a branch off of main in your new repo called
+something like <code>finishing-touches</code>. There are many ways to do this, but my
+preference is to use GitHub Desktop. From there, you can click the <code>Branch</code>
+tab, select <code>New branch</code>, and name your new branch. Alternatively, VSCode has
+its own GUI for git. You can also make use of the command line directly in
+VSCode to run git commands. It's entirely up to you. Regardless of your choice,
+we'll want a branch that you can later make a pull request from with all
+your changes.</p>
+<p><strong>Note</strong>: because you may have changes still sitting in a pull request,
+you'll want to make this new branch directly from main. This may seem weird
+because you won't be able to see the other parts (e.g., your proof of concept)
+in VSCode. This is okay as parts 1-5 can be executed in isolation and merged
+together later. However, this does mean that you may be waiting for a pull
+request to see if your different features fit together. Once the pull request
+merges, you will need to pull the changes from main into your current branch
+to see them. If you don't like this workflow, you may try following the
+rebase strategies described <a href="https://stackoverflow.com/questions/35790561/working-while-waiting-for-pending-pr">here</a>
+and <a href="https://stackoverflow.com/questions/18021888/continue-working-on-a-git-branch-after-making-a-pull-request">here</a>.</p>
+<h2 id="assignment-tasks">Assignment Tasks</h2>
+<p>Your primary task for this assignment is to polish up your code and get it
+ready to publish. To do that, you are being tasked with testing all of your
+existing code. You are also being tasked with coming up with at least two
+samples of your component being used for something. When all is said and done,
+you will publish your component to an open-source repository of your choosing.</p>
+<h3 id="testing">Testing</h3>
+<p>As a part of testing your code, you will need to create a couple test files
+in the <code>test</code> directory. One of the files will be the JUnit test file for the
+kernel. Meanwhile, the other file will be the JUnit test file for the abstract
+class.</p>
+<p>Unlike throughout the semester, testing will not involve testing against
+a reference implementation. As a result, testing is a bit messier and will
+involve calling kernel methods to check state. For example, here is a test
+case for one of the getters in NaturalNumber:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testIsZero</span><span class="hljs-params">()</span> </span>{
+    NaturalNumber n = <span class="hljs-keyword">new</span> NaturalNumber1L();
+    assertEquals(<span class="hljs-keyword">true</span>, n.isZero());
+}
+</div></code></pre>
+<p>Note that this kind of testing is not as effective as the reference testing
+because it doesn't verify the entirety of the number's state. For example,
+it's possible that <code>n.isZero()</code> somehow changes the state of <code>n</code>. By only
+verifying the boolean value, there's no way of knowing if the remaining
+number is still intact. Therefore, it's probably better to write a test
+as follows:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testGetXOne</span><span class="hljs-params">()</span> </span>{
+    NaturalNumber n = <span class="hljs-keyword">new</span> NaturalNumber1L();
+    NaturalNumber nCopy = <span class="hljs-keyword">new</span> NaturalNumber1L();
+    assertEquals(<span class="hljs-keyword">true</span>, n.isZero());
+    assertEquals(nCopy, n);
+}
+</div></code></pre>
+<p>At least that way, you know the number is unchanged (i.e., <code>isZero()</code> properly
+restored <code>n</code>).</p>
+<h3 id="use-cases">Use Cases</h3>
+<p>Another requirement to finish the project is to provide a couple of use cases
+for your component. To do that, the only expectation is that you generate
+two Java files in <code>src</code> with example code using your component either as part of
+the representation of some other proof-of-concept component or directly in
+<code>main</code>. For instance, the following class would be a extremely minimal example
+of how NaturalNumber might be used as part of a representation:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WholeNumber</span> </span>{
+
+    <span class="hljs-keyword">private</span> NaturalNumber n;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">WholeNumber</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
+       <span class="hljs-keyword">assert</span> n &gt;= <span class="hljs-number">0</span> : <span class="hljs-string">"Violation of: n &gt;= 0"</span>;
+       <span class="hljs-keyword">this</span>.n = <span class="hljs-keyword">new</span> NaturalNumber1L(n);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">countUp</span><span class="hljs-params">()</span> </span>{
+       <span class="hljs-keyword">this</span>.n.increment();
+    }
+}
+</div></code></pre>
+<h3 id="polish">Polish</h3>
+<p>Overall polish involves a variety of efforts to demonstrate code quality.
+One of which would be directory structure. As an example, I would recommend
+that your directories look as follows before submission:</p>
+<pre class="hljs"><code><div>│   .gitattributes
+│   .gitignore
+│   LICENSE
+│   README.md
+│
+├───.vscode
+│       extensions.json
+│       osu-cse-checkstyle-config.xml
+│       osu-cse-formatter.xml
+│       settings.json
+│
+├───doc
+│   │   README.md
+│   │
+│   ├───01-component-brainstorming
+│   │       01-component-brainstorming.md
+│   │
+│   ├───02-component-proof-of-concept
+│   │       02-component-proof-of-concept.md
+│   │
+│   ├───03-component-interfaces
+│   │       03-component-interfaces.md
+│   │
+│   ├───04-component-abstract-class
+│   │       04-component-abstract-classes.md
+│   │
+│   ├───05-component-kernel-implementation
+│   │       05-component-kernel-implementation.md
+│   │
+│   └───06-component-finishing-touches
+│           06-component-finishing-touches.md
+│
+├───lib
+│       components.jar
+│       hamcrest-core-1.3.jar
+│       junit-4.13.2.jar
+│       README.md
+│
+├───src
+│   │   NaturalNumberDemo.java
+│   │   README.md
+│   │   WholeNumber.java
+│   │
+│   └───components
+│       └───naturalnumber
+│                       NaturalNumber.java
+│                       NaturalNumber1L.java
+│                       NaturalNumberKernel.java
+│                       NaturalNumberSecondary.java
+│
+└───test
+    │   README.md
+    │
+    └───components
+        └───naturalnumber
+                        NaturalNumber1LTest.java
+                        NaturalNumberTest.java
+</div></code></pre>
+<p>In addition, you'll want to take into account everything you've learned over
+the last two semesters to ensure your code is of good quality. That includes
+but is not limited to documenting your methods with parameter modes, giving your
+variables good names, making good use of whitespace, respecting CheckStyle, and
+just generally not taking shortcuts. Ultimately, you should be incorporating
+the feedback you've received throughout this process into your final product.
+<strong>Have some pride in your work!</strong></p>
+<h2 id="post-assignment-tasks">Post-Assignment Tasks</h2>
+<p>The following sections detail everything that you should do once you've
+completed the assignment.</p>
+<h3 id="reflection">Reflection</h3>
+<p>Now that you have created a software component from scratch, it's time to
+reflect on that process as well as take some time to think about your
+growth as a developer. Below, you will find a series of reflection prompts.
+Take some time to fill them out honestly.</p>
+<blockquote>
+<p>A common gripe that students express is how much they feel the work they do
+in class fails to map to the real world. Now that you've had a chance to
+complete the portfolio project, how much better (or worse) do you think you
+understand software development and why?</p>
+</blockquote>
+<p>I understand software development much better now because I have had the chance to
+apply the concepts learned in class to a real project. This project has allowed me
+to use the skills I have learned in class in a practical way involving my ineterests.
+I think I have a greater appreciation for software development now in that I can see
+the creativity involved in it more. That being said, the classroom can only teach so
+much, and completing this project has highlighted gaps in my knowledge that I will need to
+address on my own.</p>
+<blockquote>
+<p>Also, did the portfolio project surface any gaps in your own knowledge of
+software development. If so, what are those gaps and how did you address them?</p>
+</blockquote>
+<p>Yes, it allowed me to understand how classes, interfaces, and abstract classes work together
+to create a complete component. I addressed this gap by looking at the OSU API
+and understanding how they structure their components and what is overridden, etc.
+As I mentioned before, this project has covered some gaps and revealed others.
+I still working on my general skills regarding VSCode and GitHub, as well as how
+languages work within these environments.</p>
+<blockquote>
+<p>Finally, as a part of completing the portfolio project, to what extent has
+your perspective of software development changed, if at all? In other words,
+is software development something you still enjoy? If not, why not?</p>
+</blockquote>
+<p>I have learned to appreciate it more because I have made a practical use for it
+instead of just doing assignments for class. It has made me more interested in my
+capability for what I can do with software engineering. This project has also shown
+me how important it is to actually know how to code and not just vibe code. If people
+only use AI for real world projects, holes and errors will sprout more than if they
+coded it themselves with a lack of experience.</p>
+<blockquote>
+<p>One of the challenges of completing the portfolio project is picking up a lot
+of skills on your own. Some of these skills are, of course, software skills.
+However, there are plenty of other skills you may have picked up through
+this process. Therefore, the first question is what skills did you pick up
+through this process?</p>
+</blockquote>
+<p>I have learned how to read APIs and also how to structure my own components in a way that
+follow the API structure. This also means getting better at documenting my code so that
+even after I have worked on it I explicity know what is going on. I have also learned
+how to use GitHub and GitHub Desktop to manage my code and version control. Much
+like any engineering project I have also honed my skill to work through tough
+problems and create an end product that I truly understand the inner workings of.</p>
+<blockquote>
+<p>The follow-up question is: could you rephrase these skills you picked up
+as bullet points that you could put on a resume? Try it below.</p>
+</blockquote>
+<ul>
+<li>Proficient in designing and implementing software components using Java</li>
+<li>Experienced in reading and understanding APIs to inform component design</li>
+<li>Skilled in documenting code effectively for long-term maintainability</li>
+<li>Familiar Git and GitHub</li>
+<li>Strong problem-solving abilities in software development projects</li>
+</ul>
+<blockquote>
+<p>Next, how has working on this project affected your career trajectory?
+In other words, do you now hate the topic you picked? Or, are you even more
+interested in it? Both outcomes are valuable to your personal development.</p>
+</blockquote>
+<p>I think it has made me more interested in software development because I can see
+how it can be applied to real world problems and also to my own interests. This upcoming
+summer I will be interning as a software engineer and after the completion of this project
+I feel much more comfortable stepping into the role. I originally picked ECE because
+I didn't want to go all in on software development. Picking the degree and enjoying
+both software and hardware has made me realize the kind of work I want to do in the future,
+which would be a job straddling the fence dividing the two.</p>
+<blockquote>
+<p>Finally, consider the skills you've picked up and your current career
+trajectory. What are some things you could do to continue on your
+career trajectory? Also, who are some mentors you could contact to help
+you stay on your path?</p>
+</blockquote>
+<p>I could contiue making projects like this outside of class to continue to develop my skills.
+I can now research how these software systems and languages that I have come to understand
+connect with the hardware I wish to work with. I am very fortunate to have a lot of
+great people to look up to, one of which first piqued my interest in software development
+and the ECE major. I will continue to stay in touch with him and seek his advice as
+I grow throughout my career journey.</p>
+<h3 id="changelog">Changelog</h3>
+<p>At the end of every assignment, you should update the
+<a href="../../CHANGELOG.md">CHANGELOG.md</a> file found in the root of the project folder.
+Here's what I would expect to see at the minimum:</p>
+<pre class="hljs"><code><div><span class="hljs-section"># Changelog</span>
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [<span class="hljs-string">Keep a Changelog</span>](<span class="hljs-link">https://keepachangelog.com/en/1.1.0/</span>),
+and this project adheres to [<span class="hljs-string">Calendar Versioning</span>](<span class="hljs-link">https://calver.org/</span>) of
+the following form: YYYY.0M.0D.
+
+<span class="hljs-section">## YYYY.MM.DD</span>
+
+<span class="hljs-section">### Added</span>
+<span class="hljs-bullet">
+- </span>Designed test suite for <span class="xml"><span class="hljs-comment">&lt;!-- insert name of component here --&gt;</span></span> component
+<span class="hljs-bullet">- </span>Designed two different use cases for <span class="xml"><span class="hljs-comment">&lt;!-- insert name of component here --&gt;</span></span> component
+
+<span class="hljs-section">### Updated</span>
+<span class="hljs-bullet">
+- </span>Changed design to include ...
+</div></code></pre>
+<p>Here <code>YYYY.MM.DD</code> would be the date of your submission, such as 2024.04.21.</p>
+<p>You may notice that things are nicely linked in the root CHANGELOG. If you'd
+like to accomplish that, you will need to make GitHub releases after each pull
+request merge (or at least tag your commits). This is not required.</p>
+<h3 id="submission">Submission</h3>
+<p>Assuming that your project is in a GitHub repo somewhere and your changes are on
+a proof-of-concept branch, then what we'll want you to do is create a pull
+request of all your changes. Pull requests are pretty easy to make if you're
+using GitHub Desktop. Just click the <code>Branch</code> tab and select
+<code>Create pull request</code>. This should pull up your browser with the pull request
+form ready to complete. Give your pull request a good title like &quot;Completed Part
+6 of the Portfolio Project&quot; and briefly describe what you've done. Then, click
+&quot;Create pull request&quot;.</p>
+<p>If all goes well, you should have a pull request that you can submit to Carmen
+via its URL. The URL should be in the form:
+<code>https://github.com/username/repo-name/pull/#</code></p>
+<p><strong>Note</strong>: you are the owner of the repo, so you are not required to wait for
+feedback before merging. After all, the main purpose of the pull request is to
+put all your changes in once place for a code review. However, I highly
+recommend keeping the pull request open until at least a peer has had a chance
+to look over your changes. Otherwise, you defer needed changes to later pull
+requests, which could sacrifice the overall quality of your work or result in
+major rework.</p>
+<h3 id="peer-review">Peer Review</h3>
+<p>Following the completion of this assignment, you will be assigned three
+students' component abstract classes for review. Please do not spend a ton of
+time on your reviews, <strong>perhaps 10-15 minutes each</strong>. Your job during the peer
+review process is to help your peers work through the logic of their implementations
+and identify gaps in their use of design-by-contract (i.e., forgetting checks
+for preconditions). If something seems wrong to you, it's probably a good hunch,
+so make sure to point it out.</p>
+<p>When reviewing your peers' assignments, please treat them with respect. We
+recommend using the following feedback rubric to ensure that your feedback is
+both helpful and respectful (you may want to render the markdown as HTML or a
+PDF to read this rubric as a table).</p>
+<table>
+<thead>
+<tr>
+<th>Criteria of Constructive Feedback</th>
+<th>Missing</th>
+<th>Developing</th>
+<th>Meeting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Specific</td>
+<td>All feedback is general (not specific)</td>
+<td>Some (but not all) feedback is specific and some examples may be provided.</td>
+<td>All feedback is specific, with examples provided where possible</td>
+</tr>
+<tr>
+<td>Actionable</td>
+<td>None of the feedback provides actionable items or suggestions for improvement</td>
+<td>Some feedback provides suggestions for improvement, while some do not</td>
+<td>All (or nearly all) feedback is actionable; most criticisms are followed by suggestions for improvement</td>
+</tr>
+<tr>
+<td>Prioritized</td>
+<td>Feedback provides only major or minor concerns, but not both. Major and minar concerns are not labeled or feedback is unorganized</td>
+<td>Feedback provides both major and minor concerns, but it is not clear which is which and/or the feedback is not as well organized as it could be</td>
+<td>Feedback clearly labels major and minor concerns. Feedback is organized in a way that allows the reader to easily understand which points to prioritize in a revision</td>
+</tr>
+<tr>
+<td>Balanced</td>
+<td>Feedback describes either strengths or areas of improvement, but not both</td>
+<td>Feedback describes both strengths and areas for improvement, but it is more heavily weighted towards one or the other, and/or descusses both but does not clearly identify which part of the feedback is a strength/area for improvement</td>
+<td>Feedback provides balanced discussion of the document's strengths and areas for improvement. It is clear which piece of feedback is which</td>
+</tr>
+<tr>
+<td>Tactful</td>
+<td>Overall tone and language are not appropriate (e.g., not considerate, could be interpreted as personal criticism or attack)</td>
+<td>Overall feedback tone and language are general positive, tactul, and non-threatening, but one or more feedback comments could be interpretted as not tactful and/or feedback leans toward personal criticism, not focused on the document</td>
+<td>Feedback tone and language are positive, tactful, and non-threatening. Feedback addesses the document, not the writer</td>
+</tr>
+</tbody>
+</table>
+<h3 id="assignment-feedback">Assignment Feedback</h3>
+<p>If you'd like to give feedback for this assignment (or any assignment, really),
+make use of <a href="https://forms.gle/dumXHo6A4Enucdkq9">this survey</a>. Your feedback helps make assignments
+better for future students.</p>
+
+</body>
+</html>
