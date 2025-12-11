@@ -1,7 +1,10 @@
+package components.logicgate;
+
+
 /**
  * Enumeration for basic types.
  */
-enum GateType {
+public enum GateType {
 
     /**
      * AND, OR, and NOT, follow their respective logic.

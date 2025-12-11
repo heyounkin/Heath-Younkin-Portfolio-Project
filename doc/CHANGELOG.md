@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
+## [2025.12.10]
+
+## Added
+
+- hashCode and equals methods for LogicGate1
+- Added tests for hashCode and equals methods in LogicGate1Test
+- polished overall code and comments
+- organized project into folders and packages
+
+## To Do
+
+- In future updates consider adding more complex logic gates like XOR and NAND
+- Add the ability for users to create their own custom logic gates by connecting existing ones
+
 ## [2025.11.21]
 
 ### Added

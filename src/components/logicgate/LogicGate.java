@@ -1,3 +1,4 @@
+package components.logicgate;
 /**
  * Enhanced client interface for LogicGate.
  *
@@ -36,5 +37,26 @@ public interface LogicGate extends LogicGateKernel {
      *          entries(clone.getInputs()) = this.inputs
      */
     LogicGate clone();
+
+    /**
+     * Reports whether this {@code LogicGate} is equal to the given object.
+     *
+     * @param obj
+     *            the object to compare to this
+     * @return {@code true} if this and {@code obj} represent the same logic
+     *         gate; {@code false} otherwise
+     */
+    @Override
+    boolean equals(Object obj);
+
+    /**
+     * Returns a hash code for this {@code LogicGate}. The hash code is
+     * computed from the gate's {@code GateType} and the values of its
+     * input array, and is consistent with {@link #equals(Object)}.
+     *
+     * @return a hash code value for this {@code LogicGate}
+     */
+    @Override
+    int hashCode();
 
 }

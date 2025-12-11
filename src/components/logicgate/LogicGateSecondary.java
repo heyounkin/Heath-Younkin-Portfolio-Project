@@ -1,3 +1,5 @@
+package components.logicgate;
+
 /**
  * Secondary (enhanced) implementation for LogicGate.
  *
@@ -8,13 +10,7 @@
 public abstract class LogicGateSecondary implements LogicGate {
 
     /**
-     * Toggles (inverts) a single input at the given index.
-     *
-     * @param inputIndex
-     *            index of input to toggle
-     * @updates this
-     * @requires 0 ≤ inputIndex < |this.inputs|
-     * @ensures this.inputs[inputIndex] = #!this.inputs[inputIndex]
+     * No additional representation needed.
      */
     @Override
     public void toggleInput(int inputIndex) {
@@ -31,11 +27,7 @@ public abstract class LogicGateSecondary implements LogicGate {
     }
 
     /**
-     * Returns a string representation of this gate and its current output.
-     *
-     * @return a readable string e.g. "AND(1,1) = 1"
-     * @ensures toString = (this.type) + "(" + entries(this.inputs) + ") = " +
-     *          this.getOutput()
+     * No additional representation needed.
      */
     @Override
     public String toString() {
@@ -86,11 +78,7 @@ public abstract class LogicGateSecondary implements LogicGate {
     }
 
     /**
-     * Creates a duplicate LogicGate with the same type and inputs.
-     *
-     * @return new LogicGate identical to this one
-     * @ensures clone != this AND clone.getType() = this.type AND
-     *          entries(clone.getInputs()) = this.inputs
+     * No additional representation needed.
      */
     @Override
     public LogicGate clone() {
@@ -106,6 +94,41 @@ public abstract class LogicGateSecondary implements LogicGate {
             copy.setInputs(a);
         }
         return (LogicGate) copy;
+    }
+
+    /**
+     * No additional representation needed.
+     */
+    @Override
+    public boolean equals(Object obj) {
+    if (obj == this) {
+        return true;
+    }
+    if (!(obj instanceof LogicGate1)) {
+        return false;
+    }
+    LogicGate1 other = (LogicGate1) obj;
+    return this.getType() == other.getType()
+            && java.util.Arrays.equals(this.getInputs(), other.getInputs());
+    }
+
+    /**
+     * No additional representation needed.
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 17;
+
+        // Type part (null-safe)
+        GateType t = this.getType();
+        result = prime * result + (t == null ? 0 : t.hashCode());
+
+        // Inputs part (Arrays.hashCode handles null arrays as 0)
+        boolean[] a = this.getInputs();
+        result = prime * result + java.util.Arrays.hashCode(a);
+
+        return result;
     }
 }
 
